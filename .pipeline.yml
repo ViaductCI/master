@@ -1,0 +1,39 @@
+name: My CI/CD Pipeline
+stages:
+  - name: Build
+    jobs:
+      - name: Compile
+        repository: https://github.com/user/repo.git
+        branch: main
+        commands:
+          - cargo build --release
+        inputs:
+          - name: config.toml
+            value: |
+              [build]
+              target = "x86_64-unknown-linux-gnu"
+        outputs:
+          - name: binary
+            path: target/release/my_app
+
+  - name: Test
+    jobs:
+      - name: Unit Tests
+        repository: https://github.com/user/repo.git
+        branch: main
+        commands:
+          - cargo test
+        outputs:
+          - name: test_results
+            path: test_results.txt
+
+  - name: Deploy
+    jobs:
+      - name: Push to Production
+        repository: https://github.com/user/deploy-scripts.git
+        branch: main
+        commands:
+          - ./deploy.sh
+        inputs:
+          - name: app_binary
+            value: ${{Build.Compile.outputs.binary}}
