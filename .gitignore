@@ -23,3 +23,8 @@ Cargo.lock
 # Added by cargo
 
 /target
+pipeline.db
+pipeline.db-shm
+pipeline.db-wal
+targets.json
+/targets
