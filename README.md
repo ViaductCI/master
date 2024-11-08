@@ -129,7 +129,7 @@ The server can be configured using environment variables:
 2. **Setup**
    ```bash
    # Clone the repository
-   git clone <repository-url>
+   git clone https://github.com/ViaductCI/master
 
    # Build the project
    cargo build --release
